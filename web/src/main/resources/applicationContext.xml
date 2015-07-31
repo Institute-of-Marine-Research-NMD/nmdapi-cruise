@@ -20,9 +20,11 @@
     <context:component-scan base-package="no.imr.nmdapi.nmdcruise.service.config" />
 
     <!-- S2D dao layers -->
-    <context:component-scan base-package="no.imr.nmdapi.nmdcruise.dao.config" />
-    <context:component-scan base-package="no.imr.nmdapi.common.dao.config" />
+    <context:component-scan base-package="no.imr.nmdapi.dao.file.config" />
     <!-- Error handling advice -->
     <context:component-scan base-package="no.imr.nmdapi.common.advice" />
+
+    <!-- Security -->
+    <context:component-scan base-package="no.imr.nmdapi.nmdcruise.security.access.voters" />
 
 </beans>
