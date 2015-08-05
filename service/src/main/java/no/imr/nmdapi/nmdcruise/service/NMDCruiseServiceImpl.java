@@ -22,11 +22,13 @@ public class NMDCruiseServiceImpl implements NMDCruiseService {
     @Override
     public void deleteData(final String missiontype, final String year, final String platform, final String delivery) {
         nmdDataDao.delete(missiontype, year, platform, delivery);
+        nmdDataDao.deleteDataset(missiontype, year, platform, delivery, "CRUISE");
     }
 
    @Override
     public void insertData(final String missiontype, final String year, final String platform, final String delivery, final CruiseType cruise) {
         nmdDataDao.insert(missiontype, year, platform, delivery, cruise, CruiseType.class);
+        nmdDataDao.insertDataset(missiontype, year, platform, delivery, "CRUISE");
     }
 
 
