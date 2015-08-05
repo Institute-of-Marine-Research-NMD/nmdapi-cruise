@@ -26,7 +26,7 @@ public class CruiseController {
     /**
      * Url part that defines it as mission.
      */
-    public static final String CRUISE_URL = "/nmdcruise";
+    public static final String CRUISE_URL = "/cruise";
 
     /**
      * Class logger.
