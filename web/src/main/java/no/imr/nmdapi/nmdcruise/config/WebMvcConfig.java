@@ -3,7 +3,7 @@ package no.imr.nmdapi.nmdcruise.config;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import java.util.List;
 import javax.xml.bind.JAXBException;
-import no.imr.nmdapi.common.converters.JAXBHttpMessageConverter;
+import no.imr.nmdapi.common.jaxb.converters.JAXBHttpMessageConverter;
 import no.imr.nmdapi.nmdcruise.converters.mapper.CruiseNamespacePrefixMapper;
 import no.imr.nmdapi.nmdcruise.converters.mapper.ResponseNamespacePrefixMapper;
 import org.slf4j.Logger;
@@ -97,7 +97,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         JAXBHttpMessageConverter converter = null;
         try {
             converter = new JAXBHttpMessageConverter(new ResponseNamespacePrefixMapper(),
-                    "no.imr.nmd.commons.cruise.jaxb");
+                    "no.imr.nmdapi.generic.response.v1");
         } catch (JAXBException ex) {
             LOGGER.error("Error creating message converter.", ex);
         }

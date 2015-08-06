@@ -1,4 +1,4 @@
-package no.imr.nmdapi.common.advice;
+package no.imr.nmdapi.nmdcruise.advices;
 
 import java.math.BigInteger;
 import no.imr.nmdapi.exceptions.AlreadyExistsException;

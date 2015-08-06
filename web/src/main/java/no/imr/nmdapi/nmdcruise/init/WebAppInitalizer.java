@@ -30,7 +30,7 @@ public class WebAppInitalizer extends AbstractDispatcherServletInitializer {
     @Override
     protected WebApplicationContext createServletApplicationContext() {
         AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext();
-        ctx.scan("no.imr.nmdapi.nmdmission.controller");
+        ctx.scan("no.imr.nmdapi.nmdcruise.controller");
         ctx.setConfigLocation("classpath:imrAspectsContext.xml");
         return ctx;
     }
