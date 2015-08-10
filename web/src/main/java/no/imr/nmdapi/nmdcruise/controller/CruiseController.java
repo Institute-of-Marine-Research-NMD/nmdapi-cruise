@@ -2,6 +2,7 @@ package no.imr.nmdapi.nmdcruise.controller;
 
 import no.imr.framework.logging.slf4j.aspects.stereotype.PerformanceLogging;
 import no.imr.nmd.commons.cruise.jaxb.CruiseType;
+import no.imr.nmdapi.exceptions.BadRequestException;
 import no.imr.nmdapi.nmdcruise.service.NMDCruiseService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
@@ -55,6 +57,26 @@ public class CruiseController {
     public Object find(@PathVariable(value = "missiontype") String missiontype, @PathVariable(value = "year") String year, @PathVariable(value = "platform") String platform, @PathVariable(value = "delivery") String delivery) {
         LOGGER.info("Start CruiseController.findByMission");
         return nmdCruiseService.getData(missiontype, year, platform, delivery);
+    }
+
+    /**
+     * Get data by id or cruise number.
+     *
+     * @return Response object.
+     */
+    @PerformanceLogging
+    @RequestMapping(value = "/find", method = RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public Object find(@RequestParam(value = "cruisenr", required = false) String cruisenr, @RequestParam(value = "id", required = false) String id) {
+        LOGGER.info("Start CruiseController.find");
+        if (cruisenr != null) {
+            return nmdCruiseService.getDataByCruiseNr(cruisenr);
+        } else if (id != null) {
+            return nmdCruiseService.getDataById(cruisenr, id);
+        } else {
+            throw new BadRequestException("Id or cruisenr parameters must be set.");
+        }
     }
 
     /**
