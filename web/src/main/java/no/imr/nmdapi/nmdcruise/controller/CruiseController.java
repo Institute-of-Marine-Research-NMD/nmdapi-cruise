@@ -68,12 +68,10 @@ public class CruiseController {
     @RequestMapping(value = "/find", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public Object find(@RequestParam(value = "cruisenr", required = false) String cruisenr, @RequestParam(value = "id", required = false) String id) {
+    public Object find(@RequestParam(value = "cruisenr", required = false) String cruisenr) {
         LOGGER.info("Start CruiseController.find");
         if (cruisenr != null) {
             return nmdCruiseService.getDataByCruiseNr(cruisenr);
-        } else if (id != null) {
-            return nmdCruiseService.getDataById(cruisenr, id);
         } else {
             throw new BadRequestException("Id or cruisenr parameters must be set.");
         }

@@ -37,4 +37,9 @@ public class NMDCruiseServiceImpl implements NMDCruiseService {
         nmdDataDao.update(missiontype, year, platform, delivery, cruise, CruiseType.class);
     }
 
+    @Override
+    public Object getDataByCruiseNr(String cruisenr) {
+        return null;
+    }
+
 }
