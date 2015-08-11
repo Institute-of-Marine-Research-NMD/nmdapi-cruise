@@ -1,5 +1,6 @@
 package no.imr.nmdapi.nmdcruise.controller;
 
+import javax.servlet.http.HttpServletResponse;
 import no.imr.framework.logging.slf4j.aspects.stereotype.PerformanceLogging;
 import no.imr.nmd.commons.cruise.jaxb.CruiseType;
 import no.imr.nmdapi.exceptions.BadRequestException;
@@ -73,9 +74,49 @@ public class CruiseController {
         if (cruisenr != null) {
             return nmdCruiseService.getDataByCruiseNr(cruisenr);
         } else {
-            throw new BadRequestException("Id or cruisenr parameters must be set.");
+            throw new BadRequestException("Cruisenr parameters must be set.");
         }
     }
+
+    /**
+     * Get data by id or cruise number.
+     *
+     * @return Response object.
+     */
+    @PerformanceLogging
+    @RequestMapping(value = "/find", method = RequestMethod.HEAD)
+    @ResponseBody
+    public void find(HttpServletResponse httpServletResponse, @RequestParam(value = "cruisenr", required = false) String cruisenr) {
+        LOGGER.info("Start CruiseController.find");
+        if (nmdCruiseService.hasDataByCruiseNr(cruisenr)) {
+            httpServletResponse.setStatus(HttpServletResponse.SC_OK);
+        } else {
+            httpServletResponse.setStatus(HttpServletResponse.SC_NOT_FOUND);
+        }
+    }
+
+    /**
+     * Does the mission have data
+     *
+     * @param missiontype
+     * @param year
+     * @param platform
+     * @param delivery
+     * @return
+     */
+    @PerformanceLogging
+    @RequestMapping(value = "/{missiontype}/{year}/{platform}/{delivery}", method = RequestMethod.HEAD)
+    @ResponseBody
+    public void  hasData(HttpServletResponse httpServletResponse,@PathVariable(value = "missiontype") String missiontype, @PathVariable(value = "year") String year, @PathVariable(value = "platform") String platform, @PathVariable(value = "delivery") String delivery) {
+        LOGGER.info("Start CruiseController.hasData");
+        if (nmdCruiseService.hasData(missiontype, year, platform, delivery)){
+           httpServletResponse.setStatus(HttpServletResponse.SC_OK);
+
+        } else {
+         httpServletResponse.setStatus(HttpServletResponse.SC_NOT_FOUND);
+        }
+    }
+
 
     /**
      * Delete biotic data for mission.

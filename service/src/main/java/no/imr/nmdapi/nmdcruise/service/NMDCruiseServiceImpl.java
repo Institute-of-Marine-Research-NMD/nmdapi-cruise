@@ -38,8 +38,18 @@ public class NMDCruiseServiceImpl implements NMDCruiseService {
     }
 
     @Override
-    public Object getDataByCruiseNr(String cruisenr) {
-        return null;
+    public Object getDataByCruiseNr(final String cruisenr) {
+        return nmdDataDao.getByCruiseNr(CruiseType.class, cruisenr);
+    }
+
+    @Override
+    public boolean hasDataByCruiseNr(String cruisenr) {
+        return nmdDataDao.hasDataByCruiseNr(cruisenr);
+    }
+
+    @Override
+    public boolean hasData(String missiontype, String year, String platform, String delivery) {
+        return nmdDataDao.hasData(missiontype, year, platform, delivery);
     }
 
 }

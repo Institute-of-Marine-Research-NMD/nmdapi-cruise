@@ -49,7 +49,7 @@ public interface NMDCruiseService {
      * @param year
      * @param platform
      * @param delivery
-     * @param missionData   Mission data.
+     * @param cruise
      */
     void insertData(String missiontype, String year, String platform, String delivery, CruiseType cruise);
 
@@ -59,6 +59,23 @@ public interface NMDCruiseService {
      * @return
      */
     Object getDataByCruiseNr(String cruisenr);
+
+    /**
+     *
+     * @param cruisenr
+     * @return
+     */
+    boolean hasDataByCruiseNr(String cruisenr);
+
+    /**
+     * 
+     * @param missiontype
+     * @param year
+     * @param platform
+     * @param delivery
+     * @return
+     */
+    boolean hasData(String missiontype, String year, String platform, String delivery);
 
 
 }
