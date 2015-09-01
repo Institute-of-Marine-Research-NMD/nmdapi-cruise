@@ -1,7 +1,8 @@
 package no.imr.nmdapi.nmdcruise.service;
 
 import no.imr.nmd.commons.cruise.jaxb.CruiseType;
-import no.imr.nmdapi.dao.file.NMDDataDao;
+import no.imr.nmdapi.dao.file.NMDDatasetDao;
+import org.apache.commons.configuration.Configuration;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -10,46 +11,58 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author kjetilf
  */
 public class NMDCruiseServiceImpl implements NMDCruiseService {
+    /**
+     * Data type.
+     */
+    private static final String TYPE = "cruise";
+
+    /**
+     * Dataset name.
+     */
+    private static final String DATASET_NAME = "data";
 
     @Autowired
-    private NMDDataDao nmdDataDao;
+    private NMDDatasetDao nmdDatasetDao;
+
+    @Autowired
+    private Configuration configuration;
 
     @Override
     public Object getData(final String missiontype, final String year, final String platform, final String delivery) {
-        return nmdDataDao.get(missiontype, year, platform, delivery, CruiseType.class);
+        return nmdDatasetDao.get(TYPE, DATASET_NAME, CruiseType.class.getPackage().getName(), missiontype, year, platform, delivery);
     }
 
     @Override
     public void deleteData(final String missiontype, final String year, final String platform, final String delivery) {
-        nmdDataDao.delete(missiontype, year, platform, delivery);
-        nmdDataDao.deleteDataset(missiontype, year, platform, delivery, "CRUISE");
+        nmdDatasetDao.delete(TYPE, DATASET_NAME, true, missiontype, year, platform, delivery);
     }
 
    @Override
-    public void insertData(final String missiontype, final String year, final String platform, final String delivery, final CruiseType cruise) {
-        nmdDataDao.insert(missiontype, year, platform, delivery, cruise, CruiseType.class);
-        nmdDataDao.insertDataset(missiontype, year, platform, delivery, "CRUISE");
+    public void insertData(final String missiontype, final String year, final String platform, final String delivery, final CruiseType dataset) {
+        String readRole = configuration.getString("default.readrole");
+        String writeRole = configuration.getString("default.writerole");
+        String owner = configuration.getString("default.owner");
+        nmdDatasetDao.insert(writeRole, readRole, owner, TYPE, DATASET_NAME, dataset, true, missiontype, year, platform, delivery);
     }
 
 
     @Override
-    public void updateData(final String missiontype, final String year, final String platform, final String delivery, final CruiseType cruise) {
-        nmdDataDao.update(missiontype, year, platform, delivery, cruise, CruiseType.class);
-    }
-
-    @Override
-    public Object getDataByCruiseNr(final String cruisenr) {
-        return nmdDataDao.getByCruiseNr(CruiseType.class, cruisenr);
-    }
-
-    @Override
-    public boolean hasDataByCruiseNr(String cruisenr) {
-        return nmdDataDao.hasDataByCruiseNr(cruisenr);
+    public void updateData(final String missiontype, final String year, final String platform, final String delivery, final CruiseType dataset) {
+        nmdDatasetDao.update(TYPE, DATASET_NAME, dataset, missiontype, year, platform, delivery);
     }
 
     @Override
     public boolean hasData(String missiontype, String year, String platform, String delivery) {
-        return nmdDataDao.hasData(missiontype, year, platform, delivery);
+        return nmdDatasetDao.hasData(TYPE, DATASET_NAME, missiontype, year, platform, delivery);
     }
 
+    @Override
+    public Object getDataByCruiseNr(final String cruisenr) {
+        return nmdDatasetDao.getByCruisenr(TYPE, DATASET_NAME, CruiseType.class.getPackage().getName(), cruisenr);
+    }
+
+    @Override
+    public boolean hasDataByCruiseNr(final String cruisenr) {
+        return nmdDatasetDao.hasDataByCruisenr(TYPE, DATASET_NAME, CruiseType.class.getPackage().getName(), cruisenr);
+    }
 }
