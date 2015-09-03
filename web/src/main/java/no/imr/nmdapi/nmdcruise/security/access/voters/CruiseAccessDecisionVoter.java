@@ -1,7 +1,11 @@
 package no.imr.nmdapi.nmdcruise.security.access.voters;
 
 import java.util.Collection;
+import java.util.HashSet;
+import no.imr.nmdapi.dao.file.NMDDatasetDao;
 import no.imr.nmdapi.nmdcruise.controller.CruiseController;
+import org.apache.commons.configuration.Configuration;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.access.AccessDecisionVoter;
 import static org.springframework.security.access.AccessDecisionVoter.ACCESS_ABSTAIN;
@@ -9,23 +13,24 @@ import static org.springframework.security.access.AccessDecisionVoter.ACCESS_DEN
 import static org.springframework.security.access.AccessDecisionVoter.ACCESS_GRANTED;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.web.FilterInvocation;
 import org.springframework.stereotype.Service;
 
 /**
- * Access decision voter for mission data. All mission information is
- * always available for read. ONly NMD has access to writing data.
+ * Access decision voter for cruise data.
  *
  * @author kjetilf
  */
 @Service
 public class CruiseAccessDecisionVoter implements AccessDecisionVoter<FilterInvocation> {
 
-    /**
-     * Role to have to gain write access.
-     */
-    private static final String ROLE_WRITE_ACCESS = "SG-FAG-430-NMD";
+    @Autowired
+    private NMDDatasetDao datasetDao;
+
+    @Autowired
+    private Configuration configuration;
 
     @Override
     public boolean supports(ConfigAttribute attribute) {
@@ -40,21 +45,44 @@ public class CruiseAccessDecisionVoter implements AccessDecisionVoter<FilterInvo
     @Override
     public int vote(Authentication auth, FilterInvocation obj, Collection<ConfigAttribute> confAttrs) {
         if (obj.getFullRequestUrl().contains(CruiseController.CRUISE_URL)) {
-            if (obj.getHttpRequest().getMethod().equalsIgnoreCase(HttpMethod.GET.name()) || obj.getHttpRequest().getMethod().equalsIgnoreCase(HttpMethod.HEAD.name())) {
-                // Read access.
-                return ACCESS_GRANTED;
-            } else {
-                // Write access.
-                if (auth.isAuthenticated() && auth.getAuthorities().contains(new SimpleGrantedAuthority(CruiseAccessDecisionVoter.ROLE_WRITE_ACCESS))) {
+            if (obj.getHttpRequest().getMethod().equalsIgnoreCase(HttpMethod.POST.name())) {
+                if (auth.isAuthenticated() && auth.getAuthorities().contains(new SimpleGrantedAuthority(configuration.getString("default.writerole")))) {
                     return ACCESS_GRANTED;
                 } else {
                     return ACCESS_DENIED;
                 }
+            } else if (obj.getHttpRequest().getMethod().equalsIgnoreCase(HttpMethod.PUT.name()) || obj.getHttpRequest().getMethod().equalsIgnoreCase(HttpMethod.DELETE.name())) {
+                Collection<String> auths = getAuths(auth.getAuthorities());
+                String[] args = obj.getRequestUrl().split("/");
+                if (auth.isAuthenticated() && datasetDao.hasWriteAccess(auths, "cruise", "data", args[1], args[2], args[3], args[4])) {
+                    return ACCESS_GRANTED;
+                } else {
+                    return ACCESS_DENIED;
+                }
+            } else if (obj.getHttpRequest().getMethod().equalsIgnoreCase(HttpMethod.GET.name())) {
+                Collection<String> auths = getAuths(auth.getAuthorities());
+                String[] args = obj.getRequestUrl().split("/");
+                if (datasetDao.hasReadAccess(auths, "cruise", "data", args[1], args[2], args[3], args[4])) {
+                    return ACCESS_GRANTED;
+                } else {
+                    return ACCESS_DENIED;
+                }
+            } else {
+                return ACCESS_GRANTED;
             }
         } else {
             // Not reference data.
             return ACCESS_ABSTAIN;
         }
     }
+
+    private Collection<String> getAuths(Collection<? extends GrantedAuthority> auths) {
+        Collection<String> authsStr = new HashSet<String>();
+        for (GrantedAuthority authority : auths) {
+            authsStr.add(authority.getAuthority());
+        }
+        return authsStr;
+    }
+
 
 }
