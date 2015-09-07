@@ -19,7 +19,8 @@ import org.springframework.security.web.FilterInvocation;
 import org.springframework.stereotype.Service;
 
 /**
- * Access decision voter for cruise data.
+ * Access decision voter for cruise data. As all data is standard available this
+ * voter always returns access.
  *
  * @author kjetilf
  */
@@ -62,7 +63,9 @@ public class CruiseAccessDecisionVoter implements AccessDecisionVoter<FilterInvo
             } else if (obj.getHttpRequest().getMethod().equalsIgnoreCase(HttpMethod.GET.name())) {
                 Collection<String> auths = getAuths(auth.getAuthorities());
                 String[] args = obj.getRequestUrl().split("/");
-                if (datasetDao.hasReadAccess(auths, "cruise", "data", args[1], args[2], args[3], args[4])) {
+                if (args.length != 5) {
+                    return ACCESS_GRANTED;
+                } else if (datasetDao.hasReadAccess(auths, "cruise", "data", args[1], args[2], args[3], args[4])) {
                     return ACCESS_GRANTED;
                 } else {
                     return ACCESS_DENIED;
@@ -83,6 +86,5 @@ public class CruiseAccessDecisionVoter implements AccessDecisionVoter<FilterInvo
         }
         return authsStr;
     }
-
 
 }
