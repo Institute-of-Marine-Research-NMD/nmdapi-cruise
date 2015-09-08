@@ -29,7 +29,7 @@ public class NMDCruiseServiceImpl implements NMDCruiseService {
 
     @Override
     public Object getData(final String missiontype, final String year, final String platform, final String delivery) {
-        return nmdDatasetDao.get(TYPE, DATASET_NAME, CruiseType.class.getPackage().getName(), missiontype, year, platform, delivery);
+        return nmdDatasetDao.get(TYPE, DATASET_NAME, missiontype, year, platform, delivery);
     }
 
     @Override
@@ -38,7 +38,7 @@ public class NMDCruiseServiceImpl implements NMDCruiseService {
     }
 
    @Override
-    public void insertData(final String missiontype, final String year, final String platform, final String delivery, final CruiseType dataset) {
+    public void insertData(final String missiontype, final String year, final String platform, final String delivery, final Object dataset) {
         String readRole = configuration.getString("default.readrole");
         String writeRole = configuration.getString("default.writerole");
         String owner = configuration.getString("default.owner");
@@ -47,7 +47,7 @@ public class NMDCruiseServiceImpl implements NMDCruiseService {
 
 
     @Override
-    public void updateData(final String missiontype, final String year, final String platform, final String delivery, final CruiseType dataset) {
+    public void updateData(final String missiontype, final String year, final String platform, final String delivery, final Object dataset) {
         nmdDatasetDao.update(TYPE, DATASET_NAME, dataset, missiontype, year, platform, delivery);
     }
 
@@ -58,11 +58,11 @@ public class NMDCruiseServiceImpl implements NMDCruiseService {
 
     @Override
     public Object getDataByCruiseNr(final String cruisenr) {
-        return nmdDatasetDao.getByCruisenr(TYPE, DATASET_NAME, CruiseType.class.getPackage().getName(), cruisenr);
+        return nmdDatasetDao.getByCruisenr(TYPE, DATASET_NAME, cruisenr);
     }
 
     @Override
     public boolean hasDataByCruiseNr(final String cruisenr) {
-        return nmdDatasetDao.hasDataByCruisenr(TYPE, DATASET_NAME, CruiseType.class.getPackage().getName(), cruisenr);
+        return nmdDatasetDao.hasDataByCruisenr(TYPE, DATASET_NAME, cruisenr);
     }
 }

@@ -38,9 +38,9 @@ public interface NMDCruiseService {
      * @param year
      * @param platform
      * @param delivery
-     * @param missionData   Mission data.
+     * @param cruise   Mission data.
      */
-    void updateData(String missiontype, String year, String platform, String delivery, CruiseType cruise);
+    void updateData(String missiontype, String year, String platform, String delivery, Object cruise);
 
     /**
      * Insert
@@ -51,7 +51,7 @@ public interface NMDCruiseService {
      * @param delivery
      * @param cruise
      */
-    void insertData(String missiontype, String year, String platform, String delivery, CruiseType cruise);
+    void insertData(String missiontype, String year, String platform, String delivery, Object cruise);
 
     /**
      *
@@ -68,7 +68,7 @@ public interface NMDCruiseService {
     boolean hasDataByCruiseNr(String cruisenr);
 
     /**
-     * 
+     *
      * @param missiontype
      * @param year
      * @param platform

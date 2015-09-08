@@ -166,9 +166,9 @@ public class CruiseController {
     @RequestMapping(value = "/{missiontype}/{year}/{platform}/{delivery}", method = RequestMethod.PUT)
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public void update(@PathVariable(value = "missiontype") String missiontype, @PathVariable(value = "year") String year, @PathVariable(value = "platform") String platform, @PathVariable(value = "delivery") String delivery, @RequestBody CruiseType cruise) {
+    public void update(@PathVariable(value = "missiontype") String missiontype, @PathVariable(value = "year") String year, @PathVariable(value = "platform") String platform, @PathVariable(value = "delivery") String delivery, @RequestBody CruiseType cruiseData) {
         LOGGER.info("Start MissionController.updateByMission");
-        nmdCruiseService.updateData(missiontype, year, platform, delivery, cruise);
+        nmdCruiseService.updateData(missiontype, year, platform, delivery, cruiseData);
     }
 
 }
