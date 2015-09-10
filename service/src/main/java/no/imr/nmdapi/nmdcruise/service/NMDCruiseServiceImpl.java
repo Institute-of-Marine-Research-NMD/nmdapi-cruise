@@ -1,6 +1,5 @@
 package no.imr.nmdapi.nmdcruise.service;
 
-import no.imr.nmd.commons.dataset.jaxb.DatasetType;
 import no.imr.nmdapi.dao.file.NMDDatasetDao;
 import no.imr.nmdapi.generic.response.v1.OptionKeyValueListType;
 import no.imr.nmdapi.generic.response.v1.OptionKeyValueType;
@@ -66,16 +65,6 @@ public class NMDCruiseServiceImpl implements NMDCruiseService {
     @Override
     public boolean hasDataByCruiseNr(final String cruisenr) {
         return nmdDatasetDao.hasDataByCruisenr(TYPE, DATASET_NAME, cruisenr);
-    }
-
-    @Override
-    public void updateDataset(String missiontype, String year, String platform, String delivery, DatasetType dataset) {
-        nmdDatasetDao.updateDataset(dataset, missiontype, year, platform, delivery);
-    }
-
-    @Override
-    public DatasetType getDataset(String missiontype, String year, String platform, String delivery) {
-        return nmdDatasetDao.getDatasetByName(TYPE, DATASET_NAME, missiontype, year, platform, delivery);
     }
 
     @Override
