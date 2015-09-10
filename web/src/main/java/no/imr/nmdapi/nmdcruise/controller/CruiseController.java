@@ -3,6 +3,7 @@ package no.imr.nmdapi.nmdcruise.controller;
 import javax.servlet.http.HttpServletResponse;
 import no.imr.framework.logging.slf4j.aspects.stereotype.PerformanceLogging;
 import no.imr.nmd.commons.cruise.jaxb.CruiseType;
+import no.imr.nmd.commons.dataset.jaxb.DatasetType;
 import no.imr.nmdapi.exceptions.BadRequestException;
 import no.imr.nmdapi.nmdcruise.service.NMDCruiseService;
 import org.slf4j.Logger;
@@ -131,7 +132,7 @@ public class CruiseController {
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public void delete(@PathVariable(value = "missiontype") String missiontype, @PathVariable(value = "year") String year, @PathVariable(value = "platform") String platform, @PathVariable(value = "delivery") String delivery) {
-        LOGGER.info("Start MissionController.deleteByMission");
+        LOGGER.info("Start CruiseController.deleteByMission");
         nmdCruiseService.deleteData(missiontype, year, platform, delivery);
     }
 
@@ -149,7 +150,7 @@ public class CruiseController {
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public void insert(@PathVariable(value = "missiontype") String missiontype, @PathVariable(value = "year") String year, @PathVariable(value = "platform") String platform, @PathVariable(value = "delivery") String delivery, @RequestBody CruiseType cruise) {
-        LOGGER.info("Start MissionController.insertByMission");
+        LOGGER.info("Start CruiseController.insertByMission");
         nmdCruiseService.insertData(missiontype, year, platform, delivery, cruise);
     }
 
@@ -167,8 +168,62 @@ public class CruiseController {
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public void update(@PathVariable(value = "missiontype") String missiontype, @PathVariable(value = "year") String year, @PathVariable(value = "platform") String platform, @PathVariable(value = "delivery") String delivery, @RequestBody CruiseType cruiseData) {
-        LOGGER.info("Start MissionController.updateByMission");
+        LOGGER.info("Start CruiseController.updateByMission");
         nmdCruiseService.updateData(missiontype, year, platform, delivery, cruiseData);
+    }
+
+    /**
+     * insert cruise data.
+     *
+     * @param missiontype
+     * @param year
+     * @param platform
+     * @param delivery
+     * @param dataset
+     */
+    @PerformanceLogging
+    @RequestMapping(value = "/{missiontype}/{year}/{platform}/{delivery}/dataset", method = RequestMethod.PUT)
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public void updateDataset(@PathVariable(value = "missiontype") String missiontype, @PathVariable(value = "year") String year, @PathVariable(value = "platform") String platform, @PathVariable(value = "delivery") String delivery, @RequestBody DatasetType dataset) {
+        LOGGER.info("Start CruiseController.updateDataset");
+        nmdCruiseService.updateDataset(missiontype, year, platform, delivery, dataset);
+    }
+
+    /**
+     * insert biotic data for mission.
+     *
+     * @param missiontype
+     * @param year
+     * @param platform
+     * @param delivery
+     * @return
+     */
+    @PerformanceLogging
+    @RequestMapping(value = "/{missiontype}/{year}/{platform}/{delivery}/dataset", method = RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public DatasetType getDataset(@PathVariable(value = "missiontype") String missiontype, @PathVariable(value = "year") String year, @PathVariable(value = "platform") String platform, @PathVariable(value = "delivery") String delivery) {
+        LOGGER.info("Start CruiseController.getDataset");
+        return nmdCruiseService.getDataset(missiontype, year, platform, delivery);
+    }
+
+    /**
+     * Get namepsace for data.
+     *
+     * @param missiontype
+     * @param year
+     * @param platform
+     * @param delivery
+     * @return
+     */
+    @PerformanceLogging
+    @RequestMapping(value = "/{missiontype}/{year}/{platform}/{delivery}/info", method = RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public Object getInfo(@PathVariable(value = "missiontype") String missiontype, @PathVariable(value = "year") String year, @PathVariable(value = "platform") String platform, @PathVariable(value = "delivery") String delivery) {
+        LOGGER.info("Start CruiseController.getInfo");
+        return nmdCruiseService.getInfo(missiontype, year, platform, delivery);
     }
 
 }

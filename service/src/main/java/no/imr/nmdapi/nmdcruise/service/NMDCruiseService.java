@@ -1,6 +1,6 @@
 package no.imr.nmdapi.nmdcruise.service;
 
-import no.imr.nmd.commons.cruise.jaxb.CruiseType;
+import no.imr.nmd.commons.dataset.jaxb.DatasetType;
 
 
 /**
@@ -77,5 +77,34 @@ public interface NMDCruiseService {
      */
     boolean hasData(String missiontype, String year, String platform, String delivery);
 
+    /**
+     *
+     * @param missiontype
+     * @param year
+     * @param platform
+     * @param delivery
+     * @return
+     */
+    DatasetType getDataset(String missiontype, String year, String platform, String delivery);
 
+    /**
+     * Update dataset information.
+     *
+     * @param missiontype
+     * @param year
+     * @param platform
+     * @param delivery
+     * @param dataset
+     */
+    void updateDataset(String missiontype, String year, String platform, String delivery, DatasetType dataset);
+
+    /**
+     *
+     * @param missiontype
+     * @param year
+     * @param platform
+     * @param delivery
+     * @return
+     */
+    Object getInfo(String missiontype, String year, String platform, String delivery);
 }

@@ -1,8 +1,6 @@
 package no.imr.nmdapi.nmdcruise.init;
 
-import java.io.IOException;
 import java.util.EnumSet;
-import java.util.logging.Level;
 import javax.servlet.DispatcherType;
 import javax.servlet.FilterRegistration.Dynamic;
 import javax.servlet.ServletContext;
@@ -55,8 +53,8 @@ public class WebAppInitalizer extends AbstractDispatcherServletInitializer {
         super.onStartup(servletContext);
         Dynamic mdcFilter = servletContext.addFilter("MDCInsertingServletFilter", ch.qos.logback.classic.helpers.MDCInsertingServletFilter.class);
         mdcFilter.addMappingForUrlPatterns(EnumSet.allOf(DispatcherType.class), false, "/*");
-            //        Dynamic securityFilter = servletContext.addFilter(AbstractSecurityWebApplicationInitializer.DEFAULT_FILTER_NAME, DelegatingFilterProxy.class);
-//        securityFilter.addMappingForUrlPatterns(EnumSet.allOf(DispatcherType.class), false, "/*");
+        Dynamic securityFilter = servletContext.addFilter(AbstractSecurityWebApplicationInitializer.DEFAULT_FILTER_NAME, DelegatingFilterProxy.class);
+        securityFilter.addMappingForUrlPatterns(EnumSet.allOf(DispatcherType.class), false, "/*");
         Dynamic encodingFilter = servletContext.addFilter("encodingFilter", org.springframework.web.filter.CharacterEncodingFilter.class);
         encodingFilter.setInitParameter("encoding", "UTF-8");
         encodingFilter.setInitParameter("forceEncoding", "true");
