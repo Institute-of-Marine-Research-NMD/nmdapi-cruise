@@ -10,7 +10,7 @@
     <artifactId>parent</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>Parent - NMDCruise</name>
+    <name>NMDAPI parent - NMDCruise</name>
     <modules>
         <module>web</module>
         <module>service</module>
