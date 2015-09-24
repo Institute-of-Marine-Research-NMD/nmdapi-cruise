@@ -24,6 +24,11 @@ import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 
+/**
+ * Configures the applications security.
+ *
+ * @author kjetilf
+ */
 @Configuration
 @EnableWebMvcSecurity
 @EnableResourceServer
@@ -53,28 +58,60 @@ public class WebSecurityConfig extends ResourceServerConfigurerAdapter {
         http.anonymous().authorities("ANONYMOUS");
     }
 
+    /**
+     * Inialize token services.
+     *
+     * @return
+     */
     @Bean
-    public DefaultTokenServices tokenServices() throws IOException, CertificateException, InvalidKeyException {
+    public DefaultTokenServices tokenServices() {
         DefaultTokenServices tokenServices = new DefaultTokenServices();
         tokenServices.setTokenStore(tokenStore());
         return tokenServices;
     }
 
+    /**
+     * Initialize token for converting jwt to oauth info.
+     *
+     * @return
+     */
     @Bean
-    public TokenEnhancer tokenEnhancer() throws IOException, CertificateException, InvalidKeyException {
-        TokenEnhancer enhancer = new JwtAccessTokenConverter("keys/fs.cer");
+    public TokenEnhancer tokenEnhancer() {
+        TokenEnhancer enhancer = null;
+        try {
+             enhancer = new JwtAccessTokenConverter("keys/fs.cer");
+            return enhancer;
+        } catch (IOException | CertificateException | InvalidKeyException ex) {
+            LOGGER.error("Error init tokenenhancer", ex);
+        }
         return enhancer;
     }
 
+    /**
+     * Initalize tokenstore. This tokenstore does not store the tokens as they are
+     *  signed jwt tokens.
+     *
+     * @return
+     */
     @Bean(name = "tokenStore")
-    public TokenStore tokenStore() throws IOException, CertificateException, InvalidKeyException {
+    public TokenStore tokenStore() {
         TokenStore store = new JwtTokenStore(accessTokenConverter());
         return store;
     }
 
+    /**
+     * Conversion of token.
+     *
+     * @return
+     */
     @Bean
-    public JwtAccessTokenConverter accessTokenConverter() throws IOException, CertificateException, InvalidKeyException {
-        JwtAccessTokenConverter accessTokenConverter = new JwtAccessTokenConverter("keys/fs.cer");
+    public JwtAccessTokenConverter accessTokenConverter() {
+        JwtAccessTokenConverter accessTokenConverter = null;
+        try {
+            accessTokenConverter = new JwtAccessTokenConverter("keys/fs.cer");
+        } catch (IOException | CertificateException | InvalidKeyException ex) {
+            LOGGER.error("Error init accessTokenConverter", ex);
+        }
         return accessTokenConverter;
     }
 }
