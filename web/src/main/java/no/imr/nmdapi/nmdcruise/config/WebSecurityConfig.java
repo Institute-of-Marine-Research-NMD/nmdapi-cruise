@@ -95,8 +95,7 @@ public class WebSecurityConfig extends ResourceServerConfigurerAdapter {
      */
     @Bean(name = "tokenStore")
     public TokenStore tokenStore() {
-        TokenStore store = new JwtTokenStore(accessTokenConverter());
-        return store;
+        return new JwtTokenStore(accessTokenConverter());
     }
 
     /**
