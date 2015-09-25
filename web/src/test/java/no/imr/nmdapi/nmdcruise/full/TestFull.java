@@ -50,7 +50,7 @@ public class TestFull {
 
     @Before
     public void setUp() throws Exception {
-        FileUtils.deleteDirectory(new File(System.getProperty("java.io.tmpdir") + File.separator + "Forskningsfartøy"));
+        FileUtils.deleteDirectory(new File(System.getProperty("java.io.tmpdir") + File.separator + "test" + File.separator));
 
         MockitoAnnotations.initMocks(this);
         XMLUnit.setIgnoreWhitespace(true);
