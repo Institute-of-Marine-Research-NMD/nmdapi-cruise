@@ -52,7 +52,7 @@ public class CruiseController {
      * @return Response object.
      */
     @PerformanceLogging
-    @RequestMapping(value = "/{missiontype}/{year}/{platform}/{delivery}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{missiontype}/{year}/{platform}/{delivery}", method = RequestMethod.GET, produces = {"application/xml;charset=UTF-8", "application/json;charset=UTF-8"})
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public Object find(@PathVariable(value = "missiontype") String missiontype, @PathVariable(value = "year") String year, @PathVariable(value = "platform") String platform, @PathVariable(value = "delivery") String delivery) {
@@ -142,7 +142,7 @@ public class CruiseController {
      * @param year
      * @param platform
      * @param delivery
-     * @param missionData
+     * @param cruise
      */
     @PerformanceLogging
     @RequestMapping(value = "/{missiontype}/{year}/{platform}/{delivery}", method = RequestMethod.POST)
@@ -181,7 +181,7 @@ public class CruiseController {
      * @return
      */
     @PerformanceLogging
-    @RequestMapping(value = "/{missiontype}/{year}/{platform}/{delivery}", method = RequestMethod.GET, params = {"type=info"})
+    @RequestMapping(value = "/{missiontype}/{year}/{platform}/{delivery}", method = RequestMethod.GET, params = {"type=info"}, produces = {"application/xml;charset=UTF-8", "application/json;charset=UTF-8"})
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public Object getInfo(@PathVariable(value = "missiontype") String missiontype, @PathVariable(value = "year") String year, @PathVariable(value = "platform") String platform, @PathVariable(value = "delivery") String delivery) {
