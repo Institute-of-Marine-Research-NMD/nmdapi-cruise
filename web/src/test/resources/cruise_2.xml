@@ -29,7 +29,7 @@
     </platformInfo>
     <datasets>
         <dataset>
-            <dataType>echosounder</dataType>
+            <dataType>ECHOSOUNDER</dataType>
             <collected>UNKNOWN</collected>
         </dataset>
     </datasets>

@@ -2,6 +2,7 @@ package no.imr.nmdapi.nmdcruise.security.access.voters;
 
 import java.util.Collection;
 import java.util.HashSet;
+import no.imr.nmd.commons.dataset.jaxb.DataTypeEnum;
 import no.imr.nmdapi.dao.file.NMDDatasetDao;
 import no.imr.nmdapi.nmdcruise.controller.CruiseController;
 import org.apache.commons.configuration.Configuration;
@@ -96,7 +97,7 @@ public class CruiseAccessDecisionVoter implements AccessDecisionVoter<FilterInvo
             } else if (obj.getHttpRequest().getMethod().equalsIgnoreCase(HttpMethod.PUT.name()) || obj.getHttpRequest().getMethod().equalsIgnoreCase(HttpMethod.DELETE.name())) {
                 Collection<String> auths = getAuths(auth.getAuthorities());
                 String[] args = obj.getRequestUrl().split("/");
-                if (auth.isAuthenticated() && datasetDao.hasWriteAccess(auths, "cruise", "data", args[MISSIONTYPE_PATH], args[YEAR_PATH], args[PLATFORM_PATH], args[DELIVERY_PATH])) {
+                if (auth.isAuthenticated() && datasetDao.hasWriteAccess(auths, DataTypeEnum.CRUISE, "data", args[MISSIONTYPE_PATH], args[YEAR_PATH], args[PLATFORM_PATH], args[DELIVERY_PATH])) {
                     LOGGER.info(GRANTED);
                     return ACCESS_GRANTED;
                 } else {
@@ -109,8 +110,7 @@ public class CruiseAccessDecisionVoter implements AccessDecisionVoter<FilterInvo
                 if (args.length != FULL_PATH_ARG_LENGTH) {
                     LOGGER.info(GRANTED);
                     return ACCESS_GRANTED;
-                } else if (datasetDao.hasReadAccess(auths, "cruise", "data", args[MISSIONTYPE_PATH], args[YEAR_PATH], args[PLATFORM_PATH], args[DELIVERY_PATH])) {
-                    LOGGER.info(GRANTED);
+                } else if (datasetDao.hasReadAccess(auths, DataTypeEnum.CRUISE, "data", args[MISSIONTYPE_PATH], args[YEAR_PATH], args[PLATFORM_PATH], args[DELIVERY_PATH])) {
                     return ACCESS_GRANTED;
                 } else {
                     LOGGER.info(DENIED);

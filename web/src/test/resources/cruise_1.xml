@@ -30,7 +30,7 @@
     </platformInfo>
     <datasets>
         <dataset>
-            <dataType>echosounder</dataType>
+            <dataType>BIOTIC</dataType>
             <collected>UNKNOWN</collected>
         </dataset>
     </datasets>
