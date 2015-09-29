@@ -56,7 +56,7 @@ public class NMDCruiseServiceImpl implements NMDCruiseService {
 
     @Override
     public Object getDataByCruiseNr(final String cruisenr, final String shipname, String contextpath) {
-        Path path = nmdDatasetDao.getByCruisenr(DataTypeEnum.BIOTIC, DATASET_NAME, cruisenr, shipname);
+        Path path = nmdDatasetDao.getByCruisenr(DataTypeEnum.CRUISE, DATASET_NAME, cruisenr, shipname);
         OptionKeyValueListType keyValueListType = new OptionKeyValueListType();
         keyValueListType.getElement().add(getOptionKeyValueType("url", getUrl(contextpath, path)));
         return keyValueListType;
@@ -64,7 +64,7 @@ public class NMDCruiseServiceImpl implements NMDCruiseService {
 
     @Override
     public boolean hasDataByCruiseNr(final String cruisenr, final String shipname) {
-        return nmdDatasetDao.hasDataByCruisenr(DataTypeEnum.BIOTIC, DATASET_NAME, cruisenr, shipname);
+        return nmdDatasetDao.hasDataByCruisenr(DataTypeEnum.CRUISE, DATASET_NAME, cruisenr, shipname);
     }
 
     @Override
