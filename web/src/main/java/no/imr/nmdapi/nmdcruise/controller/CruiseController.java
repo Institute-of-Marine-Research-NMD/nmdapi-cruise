@@ -1,5 +1,9 @@
 package no.imr.nmdapi.nmdcruise.controller;
 
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import no.imr.framework.logging.slf4j.aspects.stereotype.PerformanceLogging;
 import no.imr.nmd.commons.cruise.jaxb.CruiseType;
@@ -63,16 +67,18 @@ public class CruiseController {
     /**
      * Get data by id or cruise number.
      *
+     * @param cruisenr
      * @return Response object.
      */
     @PerformanceLogging
     @RequestMapping(value = "/find", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public Object find(@RequestParam(value = "cruisenr", required = false) String cruisenr) {
-        LOGGER.info("Start CruiseController.find");
+    public Object find(@RequestParam(value = "cruisenr", required = true) String cruisenr, @RequestParam(value = "shipname", required = true) String shipname, HttpServletRequest request) throws MalformedURLException, URISyntaxException {
+        LOGGER.info("Start BioticController.find");
         if (cruisenr != null) {
-            return nmdCruiseService.getDataByCruiseNr(cruisenr);
+            URI uri = (new URI(request.getRequestURL().toString())).resolve(".");
+            return nmdCruiseService.getDataByCruiseNr(cruisenr, shipname, uri.toString());
         } else {
             throw new BadRequestException("Cruisenr parameters must be set.");
         }
@@ -81,14 +87,15 @@ public class CruiseController {
     /**
      * Get data by id or cruise number.
      *
-     * @return Response object.
+     * @param httpServletResponse
+     * @param cruisenr
      */
     @PerformanceLogging
     @RequestMapping(value = "/find", method = RequestMethod.HEAD)
     @ResponseBody
-    public void find(HttpServletResponse httpServletResponse, @RequestParam(value = "cruisenr", required = false) String cruisenr) {
-        LOGGER.info("Start CruiseController.find");
-        if (nmdCruiseService.hasDataByCruiseNr(cruisenr)) {
+    public void find(HttpServletResponse httpServletResponse, @RequestParam(value = "cruisenr", required = false) String cruisenr, @RequestParam(value = "shipname", required = true) String shipname) {
+        LOGGER.info("Start BioticController.find");
+        if (nmdCruiseService.hasDataByCruiseNr(cruisenr, shipname)) {
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
         } else {
             httpServletResponse.setStatus(HttpServletResponse.SC_NOT_FOUND);

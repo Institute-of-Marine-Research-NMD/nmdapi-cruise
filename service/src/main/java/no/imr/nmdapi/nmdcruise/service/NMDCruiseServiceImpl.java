@@ -1,5 +1,6 @@
 package no.imr.nmdapi.nmdcruise.service;
 
+import java.nio.file.Path;
 import no.imr.nmd.commons.dataset.jaxb.DataTypeEnum;
 import no.imr.nmdapi.dao.file.NMDDatasetDao;
 import no.imr.nmdapi.generic.response.v1.OptionKeyValueListType;
@@ -35,14 +36,13 @@ public class NMDCruiseServiceImpl implements NMDCruiseService {
         nmdDatasetDao.delete(DataTypeEnum.CRUISE, DATASET_NAME, true, missiontype, year, platform, delivery);
     }
 
-   @Override
+    @Override
     public void insertData(final String missiontype, final String year, final String platform, final String delivery, final Object dataset) {
         String readRole = configuration.getString("default.readrole");
         String writeRole = configuration.getString("default.writerole");
         String owner = configuration.getString("default.owner");
         nmdDatasetDao.insert(writeRole, readRole, owner, DataTypeEnum.CRUISE, DATASET_NAME, dataset, true, missiontype, year, platform, delivery);
     }
-
 
     @Override
     public void updateData(final String missiontype, final String year, final String platform, final String delivery, final Object dataset) {
@@ -55,13 +55,16 @@ public class NMDCruiseServiceImpl implements NMDCruiseService {
     }
 
     @Override
-    public Object getDataByCruiseNr(final String cruisenr) {
-        return nmdDatasetDao.getByCruisenr(DataTypeEnum.CRUISE, DATASET_NAME, cruisenr);
+    public Object getDataByCruiseNr(final String cruisenr, final String shipname, String contextpath) {
+        Path path = nmdDatasetDao.getByCruisenr(DataTypeEnum.BIOTIC, DATASET_NAME, cruisenr, shipname);
+        OptionKeyValueListType keyValueListType = new OptionKeyValueListType();
+        keyValueListType.getElement().add(getOptionKeyValueType("url", getUrl(contextpath, path)));
+        return keyValueListType;
     }
 
     @Override
-    public boolean hasDataByCruiseNr(final String cruisenr) {
-        return nmdDatasetDao.hasDataByCruisenr(DataTypeEnum.CRUISE, DATASET_NAME, cruisenr);
+    public boolean hasDataByCruiseNr(final String cruisenr, final String shipname) {
+        return nmdDatasetDao.hasDataByCruisenr(DataTypeEnum.BIOTIC, DATASET_NAME, cruisenr, shipname);
     }
 
     @Override
@@ -81,6 +84,20 @@ public class NMDCruiseServiceImpl implements NMDCruiseService {
         formatType.setKey(key);
         formatType.setValue(value);
         return formatType;
+    }
+
+    private String getUrl(String contextpath, Path path) {
+        StringBuilder builder = new StringBuilder();
+        builder.append(contextpath);
+        builder.append("/");
+        builder.append(path.getName(path.getNameCount() - 5));
+        builder.append("/");
+        builder.append(path.getName(path.getNameCount() - 4));
+        builder.append("/");
+        builder.append(path.getName(path.getNameCount() - 3));
+        builder.append("/");
+        builder.append(path.getName(path.getNameCount() - 2));
+        return builder.toString();
     }
 
 }
