@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?><cruise xmlns="http://www.imr.no/formats/nmdcruise/v1">
     <id>no:imr:cruise:1</id>
-    <missiontype>4</missiontype>
+    <cruisePlanningSystemId>2</cruisePlanningSystemId>
+    <cruisetype>4</cruisetype>
     <startyear>2014</startyear>
-    <missionNumber>4</missionNumber>
+    <cruiseNumber>4</cruiseNumber>
     <startTime>2014-01-18T00:00:00.000+01:00</startTime>
     <stopTime>2014-01-28T00:00:00.000+01:00</stopTime>
     <purpose lang="no">2014-BAR-024 : Miljø og planktonovervåkning på Fugløya-Bjørnøya snittet i jan. 2014-NOR-011 : Overvåkning av miljø og plankton på Svinøysnittet 2014-BAR-013 : Samle detaljert informasjon om art og størrelssammensetning av organismer rundt observasjonsplattformen i Hola i Vesterålen. Det skal taes et akustisk og oseanografisk snitt gjennom statsjonen og trål og plankton trekk i nærheten av plattformen. 2014-NSJ-006 : Ta prøver av sjøvann (overflate) for undersøkelser av radioaktiv forurensning på to stasjoner på tre av Havforskningsinstituttets faste snitt (Fugløya-Bjørnøya, Gimsøy- og Svinøy-snittene). 2014-GFI-003 : Måle fysiske, kjemiske og biologiske parametrar som er viktige for å registrere endringar i klima og miljø på værstasjon M. Utsetting av Argo bøyer</purpose>
@@ -11,19 +12,19 @@
     <arrivalPort>Tromsø</arrivalPort>
     <platformInfo>
         <platform>
-            <type>Ship Name</type>
+            <type>Ship_Name</type>
             <value>Johan</value>
         </platform>
         <platform>
-            <type>ICES Ship Code</type>
+            <type>ICES_Ship_Code</type>
             <value>ICES5812</value>
         </platform>
         <platform>
-            <type>ITU Call Sign</type>
+            <type>ITU_Call_Sign</type>
             <value>LDGJ</value>
         </platform>
         <platform>
-            <type>IOC/NODC Ship Code</type>
+            <type>IOC-NODC_Ship_Code</type>
             <value>58JH</value>
         </platform>
     </platformInfo>

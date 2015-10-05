@@ -5,6 +5,7 @@ import java.util.Collection;
 import javax.servlet.http.HttpServletRequest;
 import no.imr.nmd.commons.cruise.jaxb.CruiseType;
 import no.imr.nmd.commons.dataset.jaxb.DataTypeEnum;
+import no.imr.nmd.commons.dataset.jaxb.QualityEnum;
 import no.imr.nmdapi.dao.file.NMDDatasetDao;
 import no.imr.nmdapi.dao.file.config.CommonDaoConfig;
 import no.imr.nmdapi.nmdcruise.controller.CruiseController;
@@ -85,7 +86,11 @@ public class TestCruiseAccessDecisionVoterAuth {
         if (datasetDao.hasData(DataTypeEnum.CRUISE, "data", "Forskningsfartøy", "2015", "G O Sars_LMEL", "2015101")) {
             datasetDao.delete(DataTypeEnum.CRUISE, "data", true, "Forskningsfartøy", "2015", "G O Sars_LMEL", "2015101");
         }
-        datasetDao.insert("SG-WRITE", "unrestricted", "imr", DataTypeEnum.CRUISE, "data", mission, true, "Forskningsfartøy", "2015", "G O Sars_LMEL", "2015101");
+        if (datasetDao.hasDataset(DataTypeEnum.CRUISE, "data", "Forskningsfartøy", "2015", "G O Sars_LMEL", "2015101")) {
+            datasetDao.removeDataset(DataTypeEnum.CRUISE, "data", "Forskningsfartøy", "2015", "G O Sars_LMEL", "2015101");
+        }
+        datasetDao.insert(DataTypeEnum.CRUISE, "data", mission, "Forskningsfartøy", "2015", "G O Sars_LMEL", "2015101");
+        datasetDao.createDataset("SG-WRITE", "unrestricted", "" ,"imr", QualityEnum.NONE, DataTypeEnum.CRUISE, "data", null, "Forskningsfartøy", "2015", "G O Sars_LMEL", "2015101");
         Authentication auth = mock(Authentication.class);
         doReturn(Boolean.TRUE).when(auth).isAuthenticated();
         Collection<SimpleGrantedAuthority> authorities = new ArrayList<SimpleGrantedAuthority>();
@@ -128,7 +133,11 @@ public class TestCruiseAccessDecisionVoterAuth {
         if (datasetDao.hasData(DataTypeEnum.CRUISE, "data", "Forskningsfartøy", "2015", "G O Sars_LMEL", "2015101")) {
             datasetDao.delete(DataTypeEnum.CRUISE, "data", true, "Forskningsfartøy", "2015", "G O Sars_LMEL", "2015101");
         }
-        datasetDao.insert("SG-WRITE", "unrestricted", "imr", DataTypeEnum.CRUISE, "data", mission, true, "Forskningsfartøy", "2015", "G O Sars_LMEL", "2015101");
+        if (datasetDao.hasDataset(DataTypeEnum.CRUISE, "data", "Forskningsfartøy", "2015", "G O Sars_LMEL", "2015101")) {
+            datasetDao.removeDataset(DataTypeEnum.CRUISE, "data", "Forskningsfartøy", "2015", "G O Sars_LMEL", "2015101");
+        }
+        datasetDao.insert(DataTypeEnum.CRUISE, "data", mission, "Forskningsfartøy", "2015", "G O Sars_LMEL", "2015101");
+        datasetDao.createDataset("SG-WRITE", "unrestricted", "" ,"imr", QualityEnum.NONE, DataTypeEnum.CRUISE, "data", null, "Forskningsfartøy", "2015", "G O Sars_LMEL", "2015101");
         Authentication auth = mock(Authentication.class);
         doReturn(Boolean.TRUE).when(auth).isAuthenticated();
         Collection<SimpleGrantedAuthority> authorities = new ArrayList<SimpleGrantedAuthority>();
@@ -153,7 +162,12 @@ public class TestCruiseAccessDecisionVoterAuth {
         if (datasetDao.hasData(DataTypeEnum.CRUISE, "data", "Forskningsfartøy", "2015", "G O Sars_LMEL", "2015101")) {
             datasetDao.delete(DataTypeEnum.CRUISE, "data", true, "Forskningsfartøy", "2015", "G O Sars_LMEL", "2015101");
         }
-        datasetDao.insert("SG-WRITE", "unrestricted", "imr", DataTypeEnum.CRUISE, "data", mission, true, "Forskningsfartøy", "2015", "G O Sars_LMEL", "2015101");
+        if (datasetDao.hasDataset(DataTypeEnum.CRUISE, "data", "Forskningsfartøy", "2015", "G O Sars_LMEL", "2015101")) {
+            datasetDao.removeDataset(DataTypeEnum.CRUISE, "data", "Forskningsfartøy", "2015", "G O Sars_LMEL", "2015101");
+        }
+        datasetDao.insert(DataTypeEnum.CRUISE, "data", mission, "Forskningsfartøy", "2015", "G O Sars_LMEL", "2015101");
+        datasetDao.createDataset("SG-WRITE", "unrestricted", "" ,"imr", QualityEnum.NONE, DataTypeEnum.CRUISE, "data", null, "Forskningsfartøy", "2015", "G O Sars_LMEL", "2015101");
+
         Authentication auth = mock(Authentication.class);
         doReturn(Boolean.TRUE).when(auth).isAuthenticated();
         Collection<SimpleGrantedAuthority> authorities = new ArrayList<SimpleGrantedAuthority>();
@@ -178,7 +192,11 @@ public class TestCruiseAccessDecisionVoterAuth {
         if (datasetDao.hasData(DataTypeEnum.CRUISE, "data", "Forskningsfartøy", "2015", "G O Sars_LMEL", "2015101")) {
             datasetDao.delete(DataTypeEnum.CRUISE, "data", true, "Forskningsfartøy", "2015", "G O Sars_LMEL", "2015101");
         }
-        datasetDao.insert("SG-WRITE", "unrestricted", "imr", DataTypeEnum.CRUISE, "data", mission, true, "Forskningsfartøy", "2015", "G O Sars_LMEL", "2015101");
+        if (datasetDao.hasDataset(DataTypeEnum.CRUISE, "data", "Forskningsfartøy", "2015", "G O Sars_LMEL", "2015101")) {
+            datasetDao.removeDataset(DataTypeEnum.CRUISE, "data", "Forskningsfartøy", "2015", "G O Sars_LMEL", "2015101");
+        }
+        datasetDao.insert(DataTypeEnum.CRUISE, "data", mission, "Forskningsfartøy", "2015", "G O Sars_LMEL", "2015101");
+        datasetDao.createDataset("SG-WRITE", "unrestricted", "" ,"imr", QualityEnum.NONE, DataTypeEnum.CRUISE, "data", null, "Forskningsfartøy", "2015", "G O Sars_LMEL", "2015101");
         Authentication auth = mock(Authentication.class);
         doReturn(Boolean.TRUE).when(auth).isAuthenticated();
         Collection<SimpleGrantedAuthority> authorities = new ArrayList<SimpleGrantedAuthority>();
@@ -203,7 +221,11 @@ public class TestCruiseAccessDecisionVoterAuth {
         if (datasetDao.hasData(DataTypeEnum.CRUISE, "data", "Forskningsfartøy", "2015", "G O Sars_LMEL", "2015101")) {
             datasetDao.delete(DataTypeEnum.CRUISE, "data", true, "Forskningsfartøy", "2015", "G O Sars_LMEL", "2015101");
         }
-        datasetDao.insert("SG-WRITE", "unrestricted", "imr", DataTypeEnum.CRUISE, "data", mission, true, "Forskningsfartøy", "2015", "G O Sars_LMEL", "2015101");
+        if (datasetDao.hasDataset(DataTypeEnum.CRUISE, "data", "Forskningsfartøy", "2015", "G O Sars_LMEL", "2015101")) {
+            datasetDao.removeDataset(DataTypeEnum.CRUISE, "data", "Forskningsfartøy", "2015", "G O Sars_LMEL", "2015101");
+        }
+        datasetDao.insert(DataTypeEnum.CRUISE, "data", mission, "Forskningsfartøy", "2015", "G O Sars_LMEL", "2015101");
+        datasetDao.createDataset("SG-WRITE", "unrestricted", "" ,"imr", QualityEnum.NONE, DataTypeEnum.CRUISE, "data", null, "Forskningsfartøy", "2015", "G O Sars_LMEL", "2015101");
         Authentication auth = mock(Authentication.class);
         doReturn(Boolean.TRUE).when(auth).isAuthenticated();
         Collection<SimpleGrantedAuthority> authorities = new ArrayList<SimpleGrantedAuthority>();
@@ -228,7 +250,11 @@ public class TestCruiseAccessDecisionVoterAuth {
         if (datasetDao.hasData(DataTypeEnum.CRUISE, "data", "Forskningsfartøy", "2015", "G O Sars_LMEL", "2015101")) {
             datasetDao.delete(DataTypeEnum.CRUISE, "data", true, "Forskningsfartøy", "2015", "G O Sars_LMEL", "2015101");
         }
-        datasetDao.insert("SG-WRITE", "unrestricted", "imr", DataTypeEnum.CRUISE, "data", mission, true, "Forskningsfartøy", "2015", "G O Sars_LMEL", "2015101");
+        if (datasetDao.hasDataset(DataTypeEnum.CRUISE, "data", "Forskningsfartøy", "2015", "G O Sars_LMEL", "2015101")) {
+            datasetDao.removeDataset(DataTypeEnum.CRUISE, "data", "Forskningsfartøy", "2015", "G O Sars_LMEL", "2015101");
+        }
+        datasetDao.insert(DataTypeEnum.CRUISE, "data", mission, "Forskningsfartøy", "2015", "G O Sars_LMEL", "2015101");
+        datasetDao.createDataset("SG-WRITE", "unrestricted", "" ,"imr", QualityEnum.NONE, DataTypeEnum.CRUISE, "data", null, "Forskningsfartøy", "2015", "G O Sars_LMEL", "2015101");
         Authentication auth = mock(Authentication.class);
         doReturn(Boolean.TRUE).when(auth).isAuthenticated();
         Collection<SimpleGrantedAuthority> authorities = new ArrayList<SimpleGrantedAuthority>();
@@ -253,7 +279,11 @@ public class TestCruiseAccessDecisionVoterAuth {
         if (datasetDao.hasData(DataTypeEnum.CRUISE, "data", "Forskningsfartøy", "2015", "G O Sars_LMEL", "2015101")) {
             datasetDao.delete(DataTypeEnum.CRUISE, "data", true, "Forskningsfartøy", "2015", "G O Sars_LMEL", "2015101");
         }
-        datasetDao.insert("SG-WRITE", "SG-READ", "imr", DataTypeEnum.CRUISE, "data", mission, true, "Forskningsfartøy", "2015", "G O Sars_LMEL", "2015101");
+        if (datasetDao.hasDataset(DataTypeEnum.CRUISE, "data", "Forskningsfartøy", "2015", "G O Sars_LMEL", "2015101")) {
+            datasetDao.removeDataset(DataTypeEnum.CRUISE, "data", "Forskningsfartøy", "2015", "G O Sars_LMEL", "2015101");
+        }
+        datasetDao.insert(DataTypeEnum.CRUISE, "data", mission, "Forskningsfartøy", "2015", "G O Sars_LMEL", "2015101");
+        datasetDao.createDataset("SG-WRITE", "SG-READ", "" ,"imr", QualityEnum.NONE, DataTypeEnum.CRUISE, "data", null, "Forskningsfartøy", "2015", "G O Sars_LMEL", "2015101");
         Authentication auth = mock(Authentication.class);
         doReturn(Boolean.TRUE).when(auth).isAuthenticated();
         Collection<SimpleGrantedAuthority> authorities = new ArrayList<SimpleGrantedAuthority>();
@@ -278,7 +308,11 @@ public class TestCruiseAccessDecisionVoterAuth {
         if (datasetDao.hasData(DataTypeEnum.CRUISE, "data", "Forskningsfartøy", "2015", "G O Sars_LMEL", "2015101")) {
             datasetDao.delete(DataTypeEnum.CRUISE, "data", true, "Forskningsfartøy", "2015", "G O Sars_LMEL", "2015101");
         }
-        datasetDao.insert("SG-WRITE", "SG-READ", "imr", DataTypeEnum.CRUISE, "data", mission, true, "Forskningsfartøy", "2015", "G O Sars_LMEL", "2015101");
+        if (datasetDao.hasDataset(DataTypeEnum.CRUISE, "data", "Forskningsfartøy", "2015", "G O Sars_LMEL", "2015101")) {
+            datasetDao.removeDataset(DataTypeEnum.CRUISE, "data", "Forskningsfartøy", "2015", "G O Sars_LMEL", "2015101");
+        }
+        datasetDao.insert(DataTypeEnum.CRUISE, "data", mission, "Forskningsfartøy", "2015", "G O Sars_LMEL", "2015101");
+        datasetDao.createDataset("SG-WRITE", "SG-READ", "" ,"imr", QualityEnum.NONE, DataTypeEnum.CRUISE, "data", null, "Forskningsfartøy", "2015", "G O Sars_LMEL", "2015101");
         Authentication auth = mock(Authentication.class);
         doReturn(Boolean.TRUE).when(auth).isAuthenticated();
         Collection<SimpleGrantedAuthority> authorities = new ArrayList<SimpleGrantedAuthority>();
