@@ -117,4 +117,34 @@ public class TestFull {
                 .andExpect(status().isBadRequest());
     }
 
+    @Test
+    public void testInsertGetJson() throws Exception {
+
+        mockMvc.perform(delete("/Forskningsfartøy/2015/Johan Hjort-LDGJ/2015101").characterEncoding("UTF-8"));
+
+        //Insert data.
+        mockMvc.perform(
+                post("/Forskningsfartøy/2015/Johan Hjort-LDGJ/2015101")
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding("UTF-8")
+                .content(FileUtils.readFileToString(new File(this.getClass().getClassLoader().getResource("cruise.json").getFile()), "UTF-8"))
+                )
+                .andExpect(status().isOk());
+
+       //Get data.
+        mockMvc.perform(
+                get("/Forskningsfartøy/2015/Johan Hjort-LDGJ/2015101")
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding("UTF-8"))
+                .andExpect(status().isOk());
+
+        //Get data.
+        mockMvc.perform(
+                get("/Forskningsfartøy/2015/Johan Hjort-LDGJ/2015101")
+                .contentType(MediaType.APPLICATION_XML)
+                .characterEncoding("UTF-8"))
+                .andExpect(status().isOk());
+
+    }
+
 }

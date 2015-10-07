@@ -1,0 +1,72 @@
+{
+    "id": "282bc2f217e1483983cebe2da3faf286",
+    "cruisePlanningSystemId": null,
+    "name": null,
+    "cruisetype": 4,
+    "startyear": 2015,
+    "datapath": "",
+    "cruiseNumber": 6,
+    "startTime": "2015-05-27T00:00:00.000+0000",
+    "stopTime": "2015-06-06T23:59:59.000+0000",
+    "specificArea": "",
+    "purpose": [{
+            "value": "2015-BAR-009 : Kartlegge romlige (horisontal og vertikal) utbredelse av plankton, fisk og bentos og trofiske interaksjoner, samt case study.\t ",
+            "lang": "no"
+        }],
+    "comments": "TIBIA-case study\t ",
+    "reportUrl": "",
+    "cruiseStatus": null,
+    "cruiseCode": "2015206",
+    "beiCruiseNo": null,
+    "originalSurveyNo": "",
+    "departurePort": "Tromsø",
+    "arrivalPort": "Tromsø",
+    "seaAreas": {
+        "seaArea": []
+    },
+    "platformInfo": {
+        "platform": [{
+                "type": "SHIP_NAME",
+                "value": "Johan Hjort"
+            }, {
+                "type": "ICES_SHIP_CODE",
+                "value": "ICES5812"
+            }, {
+                "type": "ITU_CALL_SIGN",
+                "value": "LDGJ"
+            }, {
+                "type": "IOC_NODC_SHIP_CODE",
+                "value": "58JH"
+            }]
+    },
+    "rented": false,
+    "persons": {
+        "person": [{
+                "firstname": "Elena",
+                "lastname": "Eriksen",
+                "roles": {
+                    "role": [{
+                            "rolename": "CRUISECOORDINATOR",
+                            "specificRole": null
+                        }, {
+                            "rolename": "CRUISELEADER",
+                            "specificRole": null
+                        }]
+                },
+                "cabin": null,
+                "startDate": null,
+                "stopDate": null,
+                "comment": null,
+                "confirmed": null
+            }]
+    },
+    "datasets": {
+        "dataset": [{
+                "dataType": "BIOTIC",
+                "collected": "UNKNOWN"
+            }, {
+                "dataType": "ECHOSOUNDER",
+                "collected": "UNKNOWN"
+            }]
+    }
+}
