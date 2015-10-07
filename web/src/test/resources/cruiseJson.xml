@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><cruise xmlns="http://www.imr.no/formats/nmdcruise/v1">
+    <id>282bc2f217e1483983cebe2da3faf286</id>
+    <cruisetype>4</cruisetype>
+    <startyear>2015</startyear>
+    <datapath></datapath>
+    <cruiseNumber>6</cruiseNumber>
+    <startTime>2015-05-27T00:00:00.000Z</startTime>
+    <stopTime>2015-06-06T23:59:59.000Z</stopTime>
+    <specificArea></specificArea>
+    <purpose lang="no">2015-BAR-009 : Kartlegge romlige (horisontal og vertikal) utbredelse av plankton, fisk og bentos og trofiske interaksjoner, samt case study.	 </purpose>
+    <comments>TIBIA-case study	 </comments>
+    <reportUrl></reportUrl>
+    <cruiseCode>2015206</cruiseCode>
+    <originalSurveyNo></originalSurveyNo>
+    <departurePort>Tromsø</departurePort>
+    <arrivalPort>Tromsø</arrivalPort>
+    <seaAreas/>
+    <platformInfo>
+        <platform>
+            <type>Ship_Name</type>
+            <value>Johan Hjort</value>
+        </platform>
+        <platform>
+            <type>ICES_Ship_Code</type>
+            <value>ICES5812</value>
+        </platform>
+        <platform>
+            <type>ITU_Call_Sign</type>
+            <value>LDGJ</value>
+        </platform>
+        <platform>
+            <type>IOC-NODC_Ship_Code</type>
+            <value>58JH</value>
+        </platform>
+    </platformInfo>
+    <rented>false</rented>
+    <persons>
+        <person>
+            <firstname>Elena</firstname>
+            <lastname>Eriksen</lastname>
+            <roles>
+                <role>
+                    <rolename>CRUISECOORDINATOR</rolename>
+                </role>
+                <role>
+                    <rolename>CRUISELEADER</rolename>
+                </role>
+            </roles>
+        </person>
+    </persons>
+    <datasets>
+        <dataset>
+            <dataType>BIOTIC</dataType>
+            <collected>UNKNOWN</collected>
+        </dataset>
+        <dataset>
+            <dataType>ECHOSOUNDER</dataType>
+            <collected>UNKNOWN</collected>
+        </dataset>
+    </datasets>
+</cruise>

@@ -127,7 +127,7 @@ public class TestFull {
                 post("/Forskningsfartøy/2015/Johan Hjort-LDGJ/2015101")
                 .contentType(MediaType.APPLICATION_JSON)
                 .characterEncoding("UTF-8")
-                .content(FileUtils.readFileToString(new File(this.getClass().getClassLoader().getResource("cruise.json").getFile()), "UTF-8"))
+                .content(FileUtils.readFileToString(new File(this.getClass().getClassLoader().getResource("cruiseJson.json").getFile()), "UTF-8"))
                 )
                 .andExpect(status().isOk());
 
@@ -139,11 +139,12 @@ public class TestFull {
                 .andExpect(status().isOk());
 
         //Get data.
+        String data = FileUtils.readFileToString(new File(this.getClass().getClassLoader().getResource("cruiseJson.xml").getFile()), "UTF-8");
         mockMvc.perform(
                 get("/Forskningsfartøy/2015/Johan Hjort-LDGJ/2015101")
                 .contentType(MediaType.APPLICATION_XML)
                 .characterEncoding("UTF-8"))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk()).andExpect(content().xml(data));
 
     }
 
