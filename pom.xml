@@ -8,7 +8,7 @@
     </parent>
     <groupId>no.imr.nmdapi.cruise</groupId>
     <artifactId>parent</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.2</version>
     <packaging>pom</packaging>
     <name>NMDAPI parent - NMDCruise</name>
     <modules>
@@ -84,7 +84,7 @@
         <connection>scm:git:git@github.com:Institute-of-Marine-Research-NMD/nmdapi-cruise.git</connection>
         <url>scm:git:git@github.com:Institute-of-Marine-Research-NMD/nmdapi-cruise.git</url>
         <developerConnection>scm:git:git@github.com:Institute-of-Marine-Research-NMD/nmdapi-cruise.git</developerConnection>
-        <tag>HEAD</tag>
+        <tag>parent-1.0.2</tag>
     </scm>
     <distributionManagement>
         <repository>

@@ -4,7 +4,7 @@
     <parent>
         <groupId>no.imr.nmdapi.cruise</groupId>
         <artifactId>parent</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>1.0.2</version>
     </parent>
     <groupId>no.imr.nmdapi.cruise.service</groupId>
     <artifactId>service</artifactId>
