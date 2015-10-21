@@ -8,7 +8,7 @@
     </parent>
     <groupId>no.imr.nmdapi.cruise</groupId>
     <artifactId>parent</artifactId>
-    <version>1.0.0</version>
+    <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>NMDAPI parent - NMDCruise</name>
     <modules>
@@ -50,8 +50,4 @@
         </dependency>
     </dependencies>
 
-
-  <scm>
-    <tag>parent-1.0.0</tag>
-  </scm>
 </project>
