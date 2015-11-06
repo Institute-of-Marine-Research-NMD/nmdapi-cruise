@@ -37,6 +37,10 @@ public class CruiseAccessDecisionVoter implements AccessDecisionVoter<FilterInvo
     /**
      * How long is the expected path when all arguments.
      */
+    private static final int CONFIG_PATH_ARG_LENGTH = 6;
+    /**
+     * How long is the expected path when all arguments.
+     */
     private static final int FULL_PATH_ARG_LENGTH = 5;
     /**
      * Argument number for delivery after split.
@@ -107,7 +111,7 @@ public class CruiseAccessDecisionVoter implements AccessDecisionVoter<FilterInvo
             } else if (obj.getHttpRequest().getMethod().equalsIgnoreCase(HttpMethod.GET.name())) {
                 Collection<String> auths = getAuths(auth.getAuthorities());
                 String[] args = obj.getRequestUrl().split("/");
-                if (args.length != FULL_PATH_ARG_LENGTH) {
+                if (args.length != FULL_PATH_ARG_LENGTH && args.length != CONFIG_PATH_ARG_LENGTH) {
                     LOGGER.info(GRANTED);
                     return ACCESS_GRANTED;
                 } else if (datasetDao.hasReadAccess(auths, DataTypeEnum.CRUISE, "data", args[MISSIONTYPE_PATH], args[YEAR_PATH], args[PLATFORM_PATH], args[DELIVERY_PATH])) {

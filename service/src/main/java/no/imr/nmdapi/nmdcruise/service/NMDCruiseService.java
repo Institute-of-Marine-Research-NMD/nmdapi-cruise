@@ -1,5 +1,7 @@
 package no.imr.nmdapi.nmdcruise.service;
 
+import no.imr.nmdapi.generic.nmdeventloggerconfig.domain.jaxb.EventloggerConfigType;
+
 /**
  * Service API for mission data.
  *
@@ -86,4 +88,39 @@ public interface NMDCruiseService {
      * @return
      */
     Object getInfo(String missiontype, String year, String platform, String delivery);
+
+    /**
+     *
+     * @param missiontype
+     * @param year
+     * @param platform
+     * @param delivery
+     * @param type
+     * @return
+     */
+    Object getConfig(String missiontype, String year, String platform, String delivery, String type);
+
+    /**
+     *
+     * @param missiontype
+     * @param year
+     * @param platform
+     * @param delivery
+     * @param type
+     * @param eventloggerConfig
+     * @return
+     */
+    void insertConfig(String missiontype, String year, String platform, String delivery, String type, EventloggerConfigType eventloggerConfig);
+
+    /**
+     *
+     * @param missiontype
+     * @param year
+     * @param platform
+     * @param delivery
+     * @param type
+     * @param eventloggerConfig
+     * @return
+     */
+    void updateConfig(String missiontype, String year, String platform, String delivery, String type, EventloggerConfigType eventloggerConfig);
 }

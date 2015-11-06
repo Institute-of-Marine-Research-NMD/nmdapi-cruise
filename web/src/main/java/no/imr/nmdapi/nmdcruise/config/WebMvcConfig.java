@@ -1,11 +1,13 @@
 package no.imr.nmdapi.nmdcruise.config;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import java.net.URL;
 import java.util.List;
 import javax.xml.bind.JAXBException;
 import no.imr.nmdapi.common.jaxb.converters.JAXBHttpMessageConverter;
 import no.imr.nmdapi.nmdcruise.converters.mapper.CruiseNamespacePrefixMapper;
+import no.imr.nmdapi.nmdcruise.converters.mapper.EventloggerConfigNamespacePrefixMapper;
 import no.imr.nmdapi.nmdcruise.converters.mapper.ResponseNamespacePrefixMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -61,6 +63,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         converters.add(getMappingJacksonHttpMessageConverter());
         converters.add(getCruiseMappingJaxBHttpMessageConverter());
+        converters.add(getEventloggerConfigMappingJaxBHttpMessageConverter());
         converters.add(getResponseMappingJaxBHttpMessageConverter());
     }
 
@@ -74,6 +77,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
         converter.setPrettyPrint(true);
         converter.getObjectMapper().configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+        converter.getObjectMapper().setSerializationInclusion(JsonInclude.Include.NON_NULL);
         return converter;
     }
 
@@ -100,6 +104,18 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         try {
             converter = new JAXBHttpMessageConverter(new ResponseNamespacePrefixMapper(), false,
                     "no.imr.nmdapi.generic.response.v1");
+        } catch (JAXBException ex) {
+            LOGGER.error("Error creating message converter.", ex);
+        }
+        return converter;
+    }
+
+    private HttpMessageConverter<?> getEventloggerConfigMappingJaxBHttpMessageConverter() {
+        JAXBHttpMessageConverter converter = null;
+        try {
+            URL schemaFile = Thread.currentThread().getContextClassLoader().getResource("eventloggerconfig.xsd");
+            converter = new JAXBHttpMessageConverter(new EventloggerConfigNamespacePrefixMapper(), false, schemaFile,
+                    "no.imr.nmdapi.generic.nmdeventloggerconfig.domain.jaxb");
         } catch (JAXBException ex) {
             LOGGER.error("Error creating message converter.", ex);
         }

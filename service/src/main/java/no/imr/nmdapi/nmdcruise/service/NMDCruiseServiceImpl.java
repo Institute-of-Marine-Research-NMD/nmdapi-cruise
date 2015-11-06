@@ -9,6 +9,7 @@ import no.imr.nmd.commons.dataset.jaxb.DataTypeEnum;
 import no.imr.nmd.commons.dataset.jaxb.QualityEnum;
 import no.imr.nmdapi.dao.file.NMDDatasetDao;
 import no.imr.nmdapi.exceptions.S2DException;
+import no.imr.nmdapi.generic.nmdeventloggerconfig.domain.jaxb.EventloggerConfigType;
 import no.imr.nmdapi.generic.response.v1.OptionKeyValueListType;
 import no.imr.nmdapi.generic.response.v1.OptionKeyValueType;
 import org.apache.commons.configuration.Configuration;
@@ -131,6 +132,21 @@ public class NMDCruiseServiceImpl implements NMDCruiseService {
         builder.append("/");
         builder.append(path.getName(path.getNameCount() - 2));
         return builder.toString();
+    }
+
+    @Override
+    public Object getConfig(String missiontype, String year, String platform, String delivery, String type) {
+        return nmdDatasetDao.get(DataTypeEnum.CRUISE, DATASET_NAME, missiontype, year, platform, delivery, "config", type);
+    }
+
+    @Override
+    public void insertConfig(String missiontype, String year, String platform, String delivery, String type, EventloggerConfigType eventloggerConfig) {
+        nmdDatasetDao.insert(DataTypeEnum.CRUISE, DATASET_NAME, missiontype, year, platform, delivery, "config", type);
+    }
+
+    @Override
+    public void updateConfig(String missiontype, String year, String platform, String delivery, String type, EventloggerConfigType eventloggerConfig) {
+        nmdDatasetDao.update(DataTypeEnum.CRUISE, DATASET_NAME, missiontype, year, platform, delivery, "config", type);
     }
 
 }

@@ -1,12 +1,17 @@
 package no.imr.nmdapi.nmdcruise.init;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Collection;
 import java.util.EnumSet;
+import java.util.logging.Level;
 import javax.servlet.DispatcherType;
 import javax.servlet.FilterRegistration.Dynamic;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import no.imr.framework.logging.logback.initalize.InitalizeLogbackHandler;
 import no.imr.framework.logging.slf4j.exceptions.LoggerInitalizationException;
+import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;

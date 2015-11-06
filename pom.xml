@@ -39,6 +39,11 @@
             <version>1.0.11</version>
         </dependency>
         <dependency>
+            <groupId>no.imr.nmd.commons.eventloggerconfig.jaxb</groupId>
+            <artifactId>commons-eventloggerconfig-jaxb</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
             <groupId>no.imr.nmdapi.commons.respones</groupId>
             <artifactId>nmdapi-commons-respones</artifactId>
             <version>1.0.4</version>
