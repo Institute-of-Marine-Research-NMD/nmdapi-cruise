@@ -74,7 +74,7 @@ public class CruiseController {
      */
     @PerformanceLogging
     @ArgumentLogging
-    @RequestMapping(value = "/find", method = RequestMethod.GET)
+    @RequestMapping(value = "/find", method = RequestMethod.GET, produces = {"application/xml;charset=UTF-8", "application/json;charset=UTF-8"})
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public Object find(@RequestParam(value = "cruisenr", required = true) String cruisenr, @RequestParam(value = "shipname", required = true) String shipname, HttpServletRequest request) throws MalformedURLException, URISyntaxException {
