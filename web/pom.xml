@@ -4,7 +4,7 @@
     <parent>
         <groupId>no.imr.nmdapi.cruise</groupId>
         <artifactId>parent</artifactId>
-        <version>1.0.6</version>
+        <version>1.0.7-SNAPSHOT</version>
     </parent>
     <groupId>no.imr.nmdapi.cruise.web</groupId>
     <artifactId>web</artifactId>
@@ -190,7 +190,7 @@
         <connection>scm:git:git@github.com:Institute-of-Marine-Research-NMD/nmdapi-cruise.git</connection>
         <url>scm:git:git@github.com:Institute-of-Marine-Research-NMD/nmdapi-cruise.git</url>
         <developerConnection>scm:git:git@github.com:Institute-of-Marine-Research-NMD/nmdapi-cruise.git</developerConnection>
-        <tag>parent-1.0.6</tag>
+        <tag>HEAD</tag>
     </scm>
     <distributionManagement>
         <repository>
